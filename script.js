@@ -1,56 +1,66 @@
+window.onload = function start() {
+  if (localStorage.pont === '0' || localStorage.pont === undefined) {
+    localStorage.pont = 0;
+  }
+}
 
-let score = document.querySelector('#score')
-score.innerText = localStorage.getItem('Pontuação')
-let pontuacao;
-let resultado;
+function atualizaPontos() {
+  if (typeof (Storage) != 'undefined') {
+    if (localStorage.pont !== undefined) {
+      let pont = parseInt(localStorage.pont);
+      pont += 3;
+      localStorage.pont = pont;
+      document.getElementById('score').innerHTML = pont;
+    } else {
+      localStorage.pont = 0;
+    }
+  }
+}
+
 function verificaCor(event) {
-    pontuacao = parseInt(localStorage.getItem('Pontuação'))
-    let textoIndicador = document.querySelector('#ansewer');
-    let elemento = event.target;
-    let elemento2 = document.querySelector('#rgb-color').innerText;
-    elemento2 = `rgb${elemento2}`;
-    console.log(elemento2);
+  let textoIndicador = document.querySelector('#answer');
+  let elemento = event.target;
+  let elemento2 = document.querySelector('#rgb-color').innerText;
+  elemento2 = `rgb${elemento2}`;
+  console.log(elemento2);
     if (elemento.style.backgroundColor == elemento2) {
       textoIndicador.innerText = 'Acertou!';
-      pontuacao += 3
-      localStorage.setItem('Pontuação', pontuacao);
-      score.innerText = pontuacao;
-
+      atualizaPontos();
     } else {
-        textoIndicador.innerText = 'Errou! Tente novamente!';
+      textoIndicador.innerText = 'Errou! Tente novamente!';
     }
 }
 
 function zerarPontuacao() {
-  localStorage.setItem('Pontuação', 0);
+  localStorage.pont = 0;
   location.reload();
 }
+
 const resetaPontuacao = document.querySelector('#reset-pontuacao');
 resetaPontuacao.addEventListener('click', zerarPontuacao);
 
 function geradorHexadecimal() {
   const paleta = document.getElementsByClassName('ball');
   for (let index = 0; index < paleta.length; index += 1) {
-
     let r = parseInt(Math.random() * 255);
     let g = parseInt(Math.random() * 255);
     let b = parseInt(Math.random() * 255);
-    paleta[index].addEventListener('click', verificaCor)
+    paleta[index].addEventListener('click', verificaCor);
     paleta[index].style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
   }
 }
 
 function ramdomCor() {
-    const corRgb = document.querySelector('#rgb-color');
-    const paleta = document.getElementsByClassName('ball');
-    let numberSort = parseInt(Math.random() * paleta.length);
-    corRgb.innerText = paleta[numberSort].style.backgroundColor.replace('rgb', '');
+  const corRgb = document.querySelector('#rgb-color');
+  const paleta = document.getElementsByClassName('ball');
+  let numberSort = parseInt(Math.random() * paleta.length);
+  corRgb.innerText = paleta[numberSort].style.backgroundColor.replace('rgb', '');
 }
 
-const btn = document.querySelector('#reset-game')
+const btn = document.querySelector('#reset-game');
 btn.addEventListener("click", function() {
-    location.reload();
+  location.reload();
 });
 
-geradorHexadecimal()
-ramdomCor()
+geradorHexadecimal();
+ramdomCor();
