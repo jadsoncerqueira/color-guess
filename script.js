@@ -7,7 +7,7 @@ window.onload = function start() {
 function atualizaPontos() {
   if (typeof (Storage) !== 'undefined') {
     if (localStorage.pont !== undefined) {
-      let pont = parseInt(localStorage.pont);
+      let pont = parseInt(localStorage.pont, radix);
       pont += 3;
       localStorage.pont = pont;
       document.getElementById('score').innerHTML = pont;
@@ -33,8 +33,7 @@ function verificaCor(event) {
 
 function zerarPontuacao() {
   localStorage.pont = 0;
-  let refresh = location.reload()
-  refresh;
+  location.reload();
 }
 
 const resetaPontuacao = document.querySelector('#reset-pontuacao');
@@ -43,9 +42,9 @@ resetaPontuacao.addEventListener('click', zerarPontuacao);
 function geradorHexadecimal() {
   const paleta = document.getElementsByClassName('ball');
   for (let index = 0; index < paleta.length; index += 1) {
-    const r = parseInt(Math.random() * 255).toString();
-    const g = parseInt(Math.random() * 255).toString();
-    const b = parseInt(Math.random() * 255).toString();
+    const r = parseInt(Math.random() * 255, radix).toString();
+    const g = parseInt(Math.random() * 255, radix).toString();
+    const b = parseInt(Math.random() * 255, radix).toString();
     paleta[index].addEventListener('click', verificaCor);
     paleta[index].style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
   }
@@ -54,15 +53,17 @@ function geradorHexadecimal() {
 function ramdomCor() {
   const corRgb = document.querySelector('#rgb-color');
   const paleta = document.getElementsByClassName('ball');
-  const numberSort = parseInt(Math.random() * paleta.length);
+  const numberSort = parseInt(Math.random() * paleta.length, radix);
   corRgb.innerText = paleta[numberSort].style.backgroundColor.replace('rgb', '');
 }
 
+function reset() {
+    let refresh = location.reload();
+    refresh;
+  }
+
 const btn = document.querySelector('#reset-game');
-btn.addEventListener("click", function() {
-  let refresh = location.reload()
-  refresh;
-});
+btn.addEventListener('click', reset);
 
 geradorHexadecimal();
 ramdomCor();

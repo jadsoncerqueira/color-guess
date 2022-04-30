@@ -3,7 +3,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.ball{
+.ball {
   width: 50px;
   height: 50px;
   border-radius: 100%;
@@ -22,7 +22,7 @@ main {
   background-color: #9fc29f;
   padding: 20px;
   border-radius: 8px;
-  border: 3px solid #0a410a;;
+  border: 3px solid #0a410a;
 }
 
 #reset-pontuacao , #reset-game {
@@ -42,5 +42,5 @@ main {
 #rgb-color {
   font-size: 25px;
   font-weight: 600;
-  margin: 0px;
+  margin: 0.001;
 }
