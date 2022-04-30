@@ -1,4 +1,10 @@
+
+let score = document.querySelector('#score')
+score.innerText = localStorage.getItem('Pontuação')
+let pontuacao;
+let resultado;
 function verificaCor(event) {
+    pontuacao = parseInt(localStorage.getItem('Pontuação'))
     let textoIndicador = document.querySelector('#ansewer');
     let elemento = event.target;
     let elemento2 = document.querySelector('#rgb-color').innerText;
@@ -6,10 +12,21 @@ function verificaCor(event) {
     console.log(elemento2);
     if (elemento.style.backgroundColor == elemento2) {
       textoIndicador.innerText = 'Acertou!';
+      pontuacao += 3
+      localStorage.setItem('Pontuação', pontuacao);
+      score.innerText = pontuacao;
+
     } else {
         textoIndicador.innerText = 'Errou! Tente novamente!';
     }
 }
+
+function zerarPontuacao() {
+  localStorage.setItem('Pontuação', 0);
+  location.reload();
+}
+const resetaPontuacao = document.querySelector('#reset-pontuacao');
+resetaPontuacao.addEventListener('click', zerarPontuacao);
 
 function geradorHexadecimal() {
   const paleta = document.getElementsByClassName('ball');
@@ -32,7 +49,6 @@ function ramdomCor() {
 
 const btn = document.querySelector('#reset-game')
 btn.addEventListener("click", function() {
-    
     location.reload();
 });
 
