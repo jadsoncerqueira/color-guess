@@ -7,7 +7,7 @@ window.onload = function start() {
 function atualizaPontos() {
   if (typeof (Storage) !== 'undefined') {
     if (localStorage.pont !== undefined) {
-      let pont = parseInt(localStorage.pont, radix);
+      let pont = parseInt(localStorage.pont, 10);
       pont += 3;
       localStorage.pont = pont;
       document.getElementById('score').innerHTML = pont;
@@ -33,7 +33,7 @@ function verificaCor(event) {
 
 function zerarPontuacao() {
   localStorage.pont = 0;
-  location.reload();
+  window.location.reload();
 }
 
 const resetaPontuacao = document.querySelector('#reset-pontuacao');
@@ -42,9 +42,9 @@ resetaPontuacao.addEventListener('click', zerarPontuacao);
 function geradorHexadecimal() {
   const paleta = document.getElementsByClassName('ball');
   for (let index = 0; index < paleta.length; index += 1) {
-    const r = parseInt(Math.random() * 255, radix).toString();
-    const g = parseInt(Math.random() * 255, radix).toString();
-    const b = parseInt(Math.random() * 255, radix).toString();
+    const r = parseInt(Math.random() * 255, 10).toString();
+    const g = parseInt(Math.random() * 255, 10).toString();
+    const b = parseInt(Math.random() * 255, 10).toString();
     paleta[index].addEventListener('click', verificaCor);
     paleta[index].style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
   }
@@ -58,9 +58,8 @@ function ramdomCor() {
 }
 
 function reset() {
-    let refresh = location.reload();
-    refresh;
-  }
+    window.location.reload();
+}
 
 const btn = document.querySelector('#reset-game');
 btn.addEventListener('click', reset);
