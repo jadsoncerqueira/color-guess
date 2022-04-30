@@ -1,13 +1,13 @@
 function verificaCor(event) {
-    let textoIndicador = document.querySelector('#ansewer')
+    let textoIndicador = document.querySelector('#ansewer');
     let elemento = event.target;
-    let elemento2 = document.querySelector('#rgb-color').innerText
+    let elemento2 = document.querySelector('#rgb-color').innerText;
     elemento2 = `rgb${elemento2}`;
-    console.log(elemento2)
+    console.log(elemento2);
     if (elemento.style.backgroundColor == elemento2) {
-      textoIndicador.innerText = 'Acertou!'
+      textoIndicador.innerText = 'Acertou!';
     } else {
-        textoIndicador.innerText = 'Errou! Tente novamente!'
+        textoIndicador.innerText = 'Errou! Tente novamente!';
     }
 }
 
@@ -29,6 +29,12 @@ function ramdomCor() {
     let numberSort = parseInt(Math.random() * paleta.length);
     corRgb.innerText = paleta[numberSort].style.backgroundColor.replace('rgb', '');
 }
+
+const btn = document.querySelector('#reset-game')
+btn.addEventListener("click", function() {
+    
+    location.reload();
+});
 
 geradorHexadecimal()
 ramdomCor()
